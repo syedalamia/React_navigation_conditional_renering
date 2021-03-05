@@ -1,23 +1,31 @@
-import logo from './logo.svg';
+import React,{useState} from 'react'
 import './App.css';
+import ProductDetails from './component/ProductDetails';
+import ProductList from './component/ProductList';
 
 function App() {
+
+  const [data, setData] = useState(0)
+
+  const [productListing,setProducting] = useState([])
+
+  const updateData=(value,valueProd)=>{
+      setData(value)
+      setProducting(valueProd)
+     
+  }
+
+  const goBackpage=()=>{
+    setProducting([])
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+      {
+      productListing.length?<ProductDetails data={data} listing={productListing} goBack={goBackpage}/>:<ProductList getClicked={updateData}/>
+      }
+  
     </div>
   );
 }
